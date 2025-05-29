@@ -1,12 +1,13 @@
 from django.shortcuts import render
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.decorators import api_view
-from .serializers import UserSerializer
+#from rest_framework.response import Response
+#from rest_framework import status
+#from rest_framework.decorators import api_view
+#from .serializers import UserSerializer
 from django.contrib.auth import authenticate
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from .serializers import RegisterSerializer, LoginSerializer
 
 def home(request):
     return render(request, 'quiz/homepage.html')
@@ -18,6 +19,9 @@ class RegisterView(APIView):
             serializer.save()
             return Response({'message': 'User registered successfully'}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def get(self, request):
+        return Response({'message': 'Hello'}, status=status.HTTP_200_OK)
 
 class LoginView(APIView):
     def post(self, request):
@@ -35,4 +39,4 @@ class LoginView(APIView):
 
 
 
-# Create your views here.
+
